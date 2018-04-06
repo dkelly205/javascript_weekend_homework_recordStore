@@ -8,6 +8,7 @@ describe('RecordStore', function(){
   var record1;
   var record2;
   var record3;
+  var record4;
   var records;
 
   beforeEach(function(){
@@ -18,6 +19,8 @@ describe('RecordStore', function(){
     records = [record1, record2, record3];
     recordStore = new RecordStore("Al's Music Lab", "Glasgow");
     recordStore.addRecords(records);
+    record4 = new Record("Drake", "Gods Plan", "Rap", 6.99);
+    record5 = new Record("Zedd", "The Middle", "Pop", 6.99);
   })
 
   it('should have a name', function(){
@@ -59,6 +62,12 @@ describe('RecordStore', function(){
   it('should report the finanicial situation of the store', function(){
     recordStore.sell(record1);
     assert.strictEqual(recordStore.finances(), "Balance: £6.99, Value of Inventory: £13.98");
+  })
+
+  it('should be able to view all records by genre', function(){
+    recordStore.addRecords([record4]);
+    recordStore.addRecords([record5]);
+    assert.deepStrictEqual(recordStore.getRecordsByGenre("Rap"), [record4]);
   })
 
 

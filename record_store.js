@@ -31,4 +31,8 @@ RecordStore.prototype.finances = function () {
   return `Balance: £${this.balance}, Value of Inventory: £${this.stockValue()}`;
 };
 
+RecordStore.prototype.getRecordsByGenre = function (genre) {
+  return _.filter(this.inventory, {genre:genre});
+};
+
 module.exports = RecordStore;
