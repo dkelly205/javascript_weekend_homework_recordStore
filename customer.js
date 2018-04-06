@@ -30,5 +30,10 @@ Customer.prototype.recordCollectionGenreValue = function (genre) {
   return _.sumBy(newArray, 'price');
 };
 
+Customer.prototype.mostValuableRecord = function () {
+  return _.maxBy(this.recordCollection, 'price');
+
+};
+
 
 module.exports = Customer;

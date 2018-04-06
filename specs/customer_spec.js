@@ -19,7 +19,7 @@ describe('Customer', function(){
     record2 = new Record("Coldplay", "The Scientist", "Rock", 6.99);
     record3 = new Record("Coldplay", "Sky Full of Stars", "Pop", 6.99);
     record4 = new Record("Oasis", "Wonderwall", "Rock", 6.99);
-    record5 = new Record("Oasis", "Morning Glory", "Pop", 6.99);
+    record5 = new Record("Oasis", "Morning Glory", "Pop", 10.99);
     recordStore = new RecordStore("Al's Music Lab", "Glasgow");
     records = [record, record2, record4, record5];
     recordStore.addRecords(records);
@@ -88,7 +88,15 @@ describe('Customer', function(){
     customer.buy(recordStore, record4);
     customer.buy(recordStore, record5);
     assert.strictEqual(customer.recordCollectionGenreValue("Rock"), 20.97)
-    assert.strictEqual(customer.recordCollectionGenreValue("Pop"), 6.99)
+    assert.strictEqual(customer.recordCollectionGenreValue("Pop"), 10.99)
+  })
+
+  it('should be able to view most valuable record', function(){
+    customer.buy(recordStore, record);
+    customer.buy(recordStore, record2);
+    customer.buy(recordStore, record4);
+    customer.buy(recordStore, record5);
+    assert.deepStrictEqual(customer.mostValuableRecord(), record5);
   })
 
 
