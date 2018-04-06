@@ -32,6 +32,15 @@ Customer.prototype.recordCollectionGenreValue = function (genre) {
 
 Customer.prototype.mostValuableRecord = function () {
   return _.maxBy(this.recordCollection, 'price');
+};
+
+Customer.prototype.sortRecordsHiToLow = function () {
+  return _.orderBy(this.recordCollection, 'price');
+
+};
+
+Customer.prototype.sortRecordsLowToHi = function () {
+  return _.orderBy(this.recordCollection, 'price', ['desc']);
 
 };
 

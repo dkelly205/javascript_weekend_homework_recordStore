@@ -14,10 +14,10 @@ describe('Customer', function(){
 
   beforeEach(function(){
     customer = new Customer("Danny", 100);
-    customer2 = new Customer("Kelly", 5);
-    record = new Record("Coldplay", "Yellow", "Rock", 6.99);
-    record2 = new Record("Coldplay", "The Scientist", "Rock", 6.99);
-    record3 = new Record("Coldplay", "Sky Full of Stars", "Pop", 6.99);
+    customer2 = new Customer("Kelly", 2);
+    record = new Record("Coldplay", "Yellow", "Rock", 3.99);
+    record2 = new Record("Coldplay", "The Scientist", "Rock", 7.99);
+    record3 = new Record("Coldplay", "Sky Full of Stars", "Pop", 5.99);
     record4 = new Record("Oasis", "Wonderwall", "Rock", 6.99);
     record5 = new Record("Oasis", "Morning Glory", "Pop", 10.99);
     recordStore = new RecordStore("Al's Music Lab", "Glasgow");
@@ -59,27 +59,27 @@ describe('Customer', function(){
   it('cash should decrease by record price when buying a record', function(){
     assert.strictEqual(customer.cash, 100);
     customer.buy(recordStore, record);
-    assert.strictEqual(customer.cash, 93.01);
+    assert.strictEqual(customer.cash, 96.01);
   })
 
   it('cash should increase by record price when selling a record', function(){
     assert.strictEqual(customer.cash, 100);
     customer.buy(recordStore, record);
-    assert.strictEqual(customer.cash, 93.01);
+    assert.strictEqual(customer.cash, 96.01);
     customer.sell(record);
     assert.strictEqual(customer.cash, 100);
   })
 
   it('should not be able to buy a record if customer does not have enough cash', function(){
     customer2.buy(recordStore, record);
-    assert.strictEqual(customer2.cash, 5);
+    assert.strictEqual(customer2.cash, 2);
     assert.strictEqual(customer2.recordCollection.length, 0);
   })
 
   it('should be able to view the total value of their collection', function(){
     customer.buy(recordStore, record);
     customer.buy(recordStore, record2);
-    assert.strictEqual(customer.recordCollectionValue(), 13.98);
+    assert.strictEqual(customer.recordCollectionValue(), 11.98);
   })
 
   it('should be able to view the total value of all records of a given genre',function(){
@@ -87,7 +87,7 @@ describe('Customer', function(){
     customer.buy(recordStore, record2);
     customer.buy(recordStore, record4);
     customer.buy(recordStore, record5);
-    assert.strictEqual(customer.recordCollectionGenreValue("Rock"), 20.97)
+    assert.strictEqual(customer.recordCollectionGenreValue("Rock"), 18.97)
     assert.strictEqual(customer.recordCollectionGenreValue("Pop"), 10.99)
   })
 
@@ -97,6 +97,15 @@ describe('Customer', function(){
     customer.buy(recordStore, record4);
     customer.buy(recordStore, record5);
     assert.deepStrictEqual(customer.mostValuableRecord(), record5);
+  })
+
+  it('should be able to sort their records by value. (ascending or descending)', function(){
+    customer.buy(recordStore, record);
+    customer.buy(recordStore, record2);
+    customer.buy(recordStore, record4);
+    customer.buy(recordStore, record5);
+    assert.deepStrictEqual(customer.sortRecordsLowToHi(),[record5, record2, record4, record]);
+    assert.deepStrictEqual(customer.sortRecordsHiToLow(),[record, record4, record2, record5]);
   })
 
 
