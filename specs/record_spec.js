@@ -25,4 +25,8 @@ describe('Record', function(){
     assert.strictEqual(record.price, 6.99);
   })
 
+  it('should return properties as a string', function(){
+    assert.strictEqual(record.properties(), "Artist: Coldplay, Title: Yellow, Genre: Rock, Price: £6.99");
+  })
+
 })
