@@ -15,6 +15,7 @@ describe('Customer', function(){
   beforeEach(function(){
     customer = new Customer("Danny", 100);
     customer2 = new Customer("Kelly", 2);
+    customer3 = new Customer("Tina", 50);
     record = new Record("Coldplay", "Yellow", "Rock", 3.99);
     record2 = new Record("Coldplay", "The Scientist", "Rock", 7.99);
     record3 = new Record("Coldplay", "Sky Full of Stars", "Pop", 5.99);
@@ -106,6 +107,14 @@ describe('Customer', function(){
     customer.buy(recordStore, record5);
     assert.deepStrictEqual(customer.sortRecordsLowToHi(),[record5, record2, record4, record]);
     assert.deepStrictEqual(customer.sortRecordsHiToLow(),[record, record4, record2, record5]);
+  })
+
+  it('should be able to compare the value of their collection with another RecordCollector', function(){
+    customer.buy(recordStore, record);
+    customer.buy(recordStore, record2);
+    customer3.buy(recordStore, record4);
+    customer3.buy(recordStore, record5);
+    assert.strictEqual(customer.compareValueOfRecords(customer3), "Tina's collection is valued more")
   })
 
 

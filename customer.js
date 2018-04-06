@@ -41,6 +41,17 @@ Customer.prototype.sortRecordsHiToLow = function () {
 
 Customer.prototype.sortRecordsLowToHi = function () {
   return _.orderBy(this.recordCollection, 'price', ['desc']);
+};
+
+Customer.prototype.compareValueOfRecords = function (customer) {
+  if(this.recordCollectionValue() === customer.recordCollectionValue()){
+    return "Both are valued the same";}
+    else if (this.recordCollectionValue() > customer.recordCollectionValue()) {
+      return `${this.name}'s collection is valued more`;
+    }
+    else{
+      return `${customer.name}'s collection is valued more`;
+    }
 
 };
 
